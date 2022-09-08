@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectors } from './store';
+import { AuthorizeForm } from './components/AuthorizeForm';
+import { ProtectedRoute } from './components/Protected';
+import { Header } from './components/Header';
+import { RecipesApp } from './components/RecipesApp';
 import './App.css';
+import { RecipeInfo } from './components/RecipeInfo';
 
-function App() {
+export const App: React.FC = () => {
+  const authStatus = useSelector(selectors.authStatus);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <div className="container">
+        <Routes>
+          <Route path="/auth" element={<AuthorizeForm />}/>
+          <Route path="/recipes" element={
+            <ProtectedRoute condition={authStatus}>
+              <RecipesApp />
+            </ProtectedRoute>
+          }/>
+          <Route path="/recipes/:recipeId" element={
+            <ProtectedRoute condition={authStatus}>
+              <RecipeInfo />
+            </ProtectedRoute>
+          }/>
+          <Route path="*" element={
+            <Navigate to="/recipes" replace />
+          }/>
+        </Routes>
+      </div>
+    </>
   );
-}
-
-export default App;
+};

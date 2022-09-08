@@ -1,0 +1,25 @@
+.recipe-page__image-and-info {
+    display: flex;
+    gap: 30px;
+}
+
+.recipe-page__main-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.recipe-page__section {
+    margin-top: 20px;
+}
+
+.recipe-page__title {
+    font-size: 36px;
+    color: #42a5f5;
+}
+
+.recipe-page__subtitle {
+    display: block;
+    border-bottom: 3px solid #42a5f5;
+    font-size: 24px;
+}
