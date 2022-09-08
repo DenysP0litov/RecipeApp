@@ -1,5 +1,6 @@
+import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getRecipe } from "../../api";
 import { RecipeDetailed, Ingredient } from "../../types";
 import './RecipeInfo.css';
@@ -7,6 +8,8 @@ import './RecipeInfo.css';
 export const RecipeInfo = () => {
     const { recipeId = 0 } = useParams();
     const [ recipe, setRecipe ] = useState<RecipeDetailed>(); 
+
+    const navigate = useNavigate();
 
     async function loadData() {
         const data = await getRecipe(+recipeId);
@@ -61,6 +64,13 @@ export const RecipeInfo = () => {
                         __html: recipe.instructions,
                     }}></div>
                 </div>
+                <Button 
+                    variant="contained"
+                    onClick={() => navigate('/recipes')}
+                    className="recipe-page__button"
+                >
+                    Back to recipe list
+                </Button>
             </div>)
             : <div>Please wait...</div>
         )
