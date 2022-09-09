@@ -52,14 +52,6 @@ export const AuthForm: React.FC = () => {
       >
         Authorize
       </Button>
-      <Button 
-        variant="contained"
-        onClick={() => {
-          console.log(authStatus);
-        }}
-      >
-        Check status
-      </Button>
     </form>
   );
 };
