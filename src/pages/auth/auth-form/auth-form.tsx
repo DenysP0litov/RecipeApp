@@ -1,14 +1,16 @@
 import { TextField, Button } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { authActions, authSelectors } from '../../../store';
 
 export const AuthForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
-  const dispatch = useDispatch();
   const authStatus = useSelector(authSelectors.authStatus);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const authorize = () => {
     if (email === 'admin@mail.com' && password === 'justdoit123') {
@@ -17,7 +19,7 @@ export const AuthForm: React.FC = () => {
         'authStatus',
         JSON.stringify(true),
       );
-      window.location.hash = '/recipes';
+      navigate('/recipes');
     } else {
       setError(true);
     }

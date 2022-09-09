@@ -1,5 +1,5 @@
-import { AuthStateType } from './types';
+import { RootStateType } from "../recipes/types";
 
 export const authSelectors = {
-    authStatus: (state: AuthStateType) => state.authStatus,
+    authStatus: (state: RootStateType) => state.auth.authStatus,
 };

@@ -1,5 +1,5 @@
-import { RecipesStateType } from "./types";
+import { RootStateType } from "./types";
 
 export const recipesSelectors = {
-    recipesList: (state: RecipesStateType) => state.recipesList,
+    recipesList: (state: RootStateType) => state.recipes.recipesList,
 };

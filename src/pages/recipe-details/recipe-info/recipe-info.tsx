@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getRecipe } from "../../../api";
-import { Ingredient } from "../../../types";
+import { Ingredient, Recipe } from "../../../types";
 import { recipesSelectors } from "../../../store";
 
 export const RecipeInfo = () => {
     const { recipeId = 0 } = useParams();
-    const recipeFromStorage = useSelector(recipesSelectors.recipesList).find(recipe => recipe.id === +recipeId);
+    const recipeFromStorage = useSelector(recipesSelectors.recipesList).find((recipe: Recipe) => recipe.id === +recipeId);
     const [ recipe, setRecipe ] = useState(recipeFromStorage);
     const navigate = useNavigate();
 

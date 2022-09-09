@@ -5,9 +5,10 @@ import thunk from 'redux-thunk';
 import { authReducer } from './auth';
 import { recipesReducer } from './recipes';
 
+
 const rootReducer = combineReducers({
-    authReducer,
-    recipesReducer,
+    auth: authReducer,
+    recipes: recipesReducer,
 });
 
 export const store = createStore(
