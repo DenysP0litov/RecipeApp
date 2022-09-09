@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectors, actions} from '../../store';
-import './Header.css';
+import { authSelectors, authActions } from '../../store';
 
-export const Header = () => {
-    const authStatus = useSelector(selectors.authStatus);
+export const Header: React.FC = () => {
+    const authStatus = useSelector(authSelectors.authStatus);
     const dispatch = useDispatch();
 
     const logout = () => {
-        dispatch(actions.setAuthStatus(false));
+        dispatch(authActions.setAuthStatus(false));
         localStorage.setItem(
             'authStatus',
             JSON.stringify(false),

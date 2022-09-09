@@ -5,9 +5,6 @@ export type Recipe = {
     dishTypes: string[],
     aggregateLikes: number,
     readyInMinutes: number,
-};
-
-export type RecipeDetailed = Recipe & {
     summary: string,
     extendedIngredients: Ingredient[],
     servings: number,

@@ -1,4 +1,4 @@
-.recipes-list {
+.recipes-catalog {
     margin-top: 40px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);

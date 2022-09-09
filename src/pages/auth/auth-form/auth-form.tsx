@@ -1,18 +1,18 @@
 import { TextField, Button } from '@mui/material';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { actions } from '../../store';
-import './AuthorizeForm.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions, authSelectors } from '../../../store';
 
-export const AuthorizeForm: React.FC = () => {
+export const AuthForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
+  const authStatus = useSelector(authSelectors.authStatus);
 
   const authorize = () => {
     if (email === 'admin@mail.com' && password === 'justdoit123') {
-      dispatch(actions.setAuthStatus(true));
+      dispatch(authActions.setAuthStatus(true));
       localStorage.setItem(
         'authStatus',
         JSON.stringify(true),
@@ -49,6 +49,14 @@ export const AuthorizeForm: React.FC = () => {
         onClick={authorize}
       >
         Authorize
+      </Button>
+      <Button 
+        variant="contained"
+        onClick={() => {
+          console.log(authStatus);
+        }}
+      >
+        Check status
       </Button>
     </form>
   );

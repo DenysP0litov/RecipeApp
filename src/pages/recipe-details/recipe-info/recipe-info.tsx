@@ -1,14 +1,15 @@
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getRecipe } from "../../api";
-import { RecipeDetailed, Ingredient } from "../../types";
-import './RecipeInfo.css';
+import { getRecipe } from "../../../api";
+import { Ingredient } from "../../../types";
+import { recipesSelectors } from "../../../store";
 
 export const RecipeInfo = () => {
     const { recipeId = 0 } = useParams();
-    const [ recipe, setRecipe ] = useState<RecipeDetailed>(); 
-
+    const recipeFromStorage = useSelector(recipesSelectors.recipesList).find(recipe => recipe.id === +recipeId);
+    const [ recipe, setRecipe ] = useState(recipeFromStorage);
     const navigate = useNavigate();
 
     async function loadData() {
@@ -18,7 +19,9 @@ export const RecipeInfo = () => {
     };
 
     useEffect(() => {
-        loadData();
+        if (!recipe) {
+            loadData();
+        };
     }, []);
 
     return (
